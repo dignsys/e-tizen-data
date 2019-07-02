@@ -5,7 +5,6 @@ StartLimitBurst=5
 StartLimitIntervalSec=5
 
 [Service]
-Type=simple
 SmackProcessLabel=System
 User=graphic_fw
 Group=graphic_fw
