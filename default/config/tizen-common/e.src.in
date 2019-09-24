@@ -123,6 +123,7 @@ group "E_Config" struct {
   value "use_desktop_window_profile" int: 0;
   value "wm_win_rotation" uchar: 1;
   value "eom_enable" uchar: 1;
+  value "screen_rotation_pre" uint: 270;
   value "use_cursor_timer" int: 0;
   value "cursor_timer_interval" int: 5;
   group "client_types" list {
