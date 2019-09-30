@@ -245,7 +245,7 @@ group "Comp_Config" struct {
     value "nocomp_begin_timeout" double: 2.0;
     value "hwc" uchar: 1;
     value "hwc_use_multi_plane" uchar: 0;
-    value "hwc_sync_mode_change" uchar: 0;
+    value "hwc_sync_mode_change" uchar: 1;
     value "hwc_deactive" uchar: 0;
     value "hwc_use_detach" uchar: 0;
     value "smooth_windows" uchar: 0;
