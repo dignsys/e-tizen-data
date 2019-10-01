@@ -216,4 +216,5 @@ group "E_Config" struct {
   value "configured_output_resolution.use" int: 0;
   value "configured_output_resolution.w" int: 0;
   value "configured_output_resolution.h" int: 0;
+  value "use_thread_max_cpu" int: 1;
 }
