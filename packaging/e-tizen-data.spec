@@ -1,7 +1,7 @@
 %define alias e-tizen-data
 
-Name:          e-tizen-data-profile_commom
-Version:       0.6.1
+Name:          e-tizen-data-profile_common
+Version:       0.6.2
 Release:       0
 Provides:      e-tizen-data = %{version}-%{release}
 BuildArch:     noarch
