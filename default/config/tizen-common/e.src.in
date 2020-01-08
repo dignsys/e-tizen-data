@@ -207,6 +207,7 @@ group "E_Config" struct {
   value "use_module_srv.qp" int: 0;
   value "conformant_ack_timeout" double: 3.0;
   value "save_win_buffer" int: 0;
+  value "save_video_buffer" int: 0;
   value "launchscreen_without_timer" uchar: 0;
   value "rsm_buffer_release_mode" int: 0;
   value "hold_prev_win_img" int: 0;
