@@ -1,3 +1,4 @@
 group "Keyrouter_Config" struct {
     value "pictureoff_disabled" int: 0;
+    value "composition_key_wait_time" double: 0.3;
 }
