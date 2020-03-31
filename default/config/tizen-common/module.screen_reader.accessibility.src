@@ -1,0 +1,4 @@
+group "Screen_Reader_Accessibility_Config" struct {
+       value "gesture.quickpanel_area_size" uint: 40;
+       value "gesture.longpress_timeout" float: 0.4;
+}

@@ -5,6 +5,7 @@ EET_EET = @eet_eet@
 EXTRA_DIST = \
              module.gesture.src \
              module.devicemgr.src \
+             module.screen_reader.accessibility.src \
              module.keyrouter.src \
              module.policy-tizen.src \
              e_bindings.src \
@@ -15,6 +16,7 @@ filesdir = $(prefix)/data/config/tizen-common/
 files_DATA = \
              module.gesture.cfg \
              module.devicemgr.cfg \
+             module.screen_reader.accessibility.cfg \
              module.keyrouter.cfg \
              module.policy-tizen.cfg \
              e_bindings.cfg \
