@@ -1,6 +1,7 @@
-######!/bin/bash
+#!/usr/bin/env bash
 
 PATH="/usr/bin:/bin:/usr/sbin:/sbin"
+E20_PID_FILE="${XDG_RUNTIME_DIR}/enlightenment.pid"
 
 function read_line_from_file()
 {
@@ -12,17 +13,24 @@ function read_line_from_file()
 
 function get_enlightenment_status()
 {
-	estat=`ps -h -O stat "$1" | awk {'print $2'}`
+	estat=`cat /proc/${epid}/stat | awk '{ print $3 }'`
 	estat=${estat:0:1}
 	echo "${estat}"
 }
 
 function display_server_check()
 {
-	epid=`pgrep enl`
+	if [ ! -e ${E20_PID_FILE} ]; then
+		dlogsend -p Error -t E20_MONITOR "E20_PID_FILE : $E20_PID_FILE"
+		dlogsend -p Error -t E20_MONITOR "## Enlightenment is not ready ! ##"
+		echo "0"
+		return
+	fi
+
+	epid=`cat ${E20_PID_FILE}`
 
 	if [ "${epid}" = "" ]; then
-	        dlogsend -p Error -t E20_MONITOR "## Enlightenment is not running ! ##"
+		dlogsend -p Error -t E20_MONITOR "## Enlightenment is not running ! ##"
 		echo "0"
 		return
 	fi
@@ -31,7 +39,7 @@ function display_server_check()
 
 	if [ "$estat" = "S" ]; then
 		wchan=`cat /proc/${epid}/wchan`
-	        dlogsend -p Info -t E20_MONITOR "## Enlightenment (PID=$epid, STAT=$estat, WCHAN=$wchan) is running ! ##"
+		dlogsend -p Info -t E20_MONITOR "## Enlightenment (PID=$epid, STAT=$estat, WCHAN=$wchan) is running ! ##"
 		echo "1"
 		return
 	fi
@@ -41,10 +49,10 @@ function display_server_check()
 	#: > /tmp/${epid}_wchan
 	#: > /tmp/${epid}_stack
 
-	dlogsend -p Info -t E20_MONITOR "## Enlightenment (PID=$epid, STAT=$estat, WCHAN=$wchan) locked up ##"
+	dlogsend -p Info -t E20_MONITOR "## Enlightenment (PID=$epid, STAT=$estat, WCHAN=$wchan) is in a infinite loop or locked up ! ##"
 
 	#top -H -bn1 -p ${epid} > /tmp/${epid}_top
-	ps -h -O stat ${epid} > /tmp/${epid}_status
+	cat /proc/${epid}/stat | awk '{ print $3 }' > /tmp/${epid}_status
 	cat /proc/${epid}/wchan > /tmp/${epid}_wchan
 	echo "" >> /tmp/${epid}_wchan
 	cat /proc/${epid}/stack > /tmp/${epid}_stack
@@ -61,7 +69,14 @@ function display_server_check()
 	echo "1"
 }
 
-epid=`pgrep enl`
+if [ ! -e ${E20_PID_FILE} ]; then
+	dlogsend -p Error -t E20_MONITOR "E20_PID_FILE : $E20_PID_FILE"
+	dlogsend -p Error -t E20_MONITOR "## Enlightenment is not ready ! ##"
+	echo "0"
+	return
+fi
+
+epid=`cat ${E20_PID_FILE}`
 
 if [ "${epid}" = "" ]; then
         dlogsend -p Error -t E20_MONITOR "## Enlightenment is not ready ! ##"
@@ -78,9 +93,5 @@ while [ 1 ]; do
 	sleep ${INTERVAL}
 
 	checkup=$(display_server_check)
-
-	#if [ "$checkup" = "0" ]; then
-	#	exit 1
-	#fi
 done
 

@@ -7,7 +7,7 @@ NotifyAccess=all
 EnvironmentFile=/etc/sysconfig/enlightenment
 ExecStartPre=-/usr/bin/keymap_update.sh
 ExecStart=/usr/bin/enlightenment
-ExecStartPost=/usr/bin/touch /run/.wm_ready
+ExecStartPost=/usr/bin/bash -c "/usr/bin/touch $XDG_RUNTIME_DIR/.wm_ready; echo $MAINPID > $XDG_RUNTIME_DIR/enlightenment.pid"
 Restart=always
 RestartSec=10
 

@@ -10,6 +10,7 @@ User=graphic_fw
 Group=graphic_fw
 Capabilities=cap_sys_ptrace=i
 SecureBits=keep-caps
+EnvironmentFile=/etc/sysconfig/enlightenment
 ExecStart=/usr/bin/bash -c /usr/bin/enlightenment_mon.sh
 Restart=always
 
