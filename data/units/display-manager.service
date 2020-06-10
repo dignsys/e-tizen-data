@@ -5,6 +5,7 @@ Description=Display manager
 Type=notify
 NotifyAccess=all
 EnvironmentFile=/etc/sysconfig/enlightenment
+SmackProcessLabel=System
 ExecStartPre=-/usr/bin/keymap_update.sh
 ExecStart=/usr/bin/enlightenment
 ExecStartPost=/usr/bin/bash -c "/usr/bin/touch $XDG_RUNTIME_DIR/.wm_ready; echo $MAINPID > $XDG_RUNTIME_DIR/enlightenment.pid"
