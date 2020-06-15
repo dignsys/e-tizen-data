@@ -203,7 +203,7 @@ group "E_Config" struct {
   value "comp_canvas_bg.b" uchar: 0;
   value "comp_canvas_bg.a" uchar: 255;
   value "comp_canvas_bg.opmode" int: 0;
-  value "use_buffer_flush" int: 0;
+  value "use_buffer_flush" int: 1;
   value "use_module_srv.qp" int: 0;
   value "conformant_ack_timeout" double: 3.0;
   value "save_win_buffer" int: 0;
